@@ -26,5 +26,32 @@ public class UserTest {
         user.add();
     }
 
+    @Test
+    public void add1Test(){
+
+        // 工厂类
+        class UserFactory{
+
+            public User getUser() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+                // 解析xml 获得 class属性值
+                String classValue = "com.yang.pojo.User";
+                // 反射，创建对象
+                Class aClass = Class.forName(classValue);
+                return (User)aClass.newInstance();
+            }
+        }
+
+        UserFactory userFactory = new UserFactory();
+        try {
+            // 通过工厂，获取对象
+            User user = userFactory.getUser();
+            Assert.assertNotNull(user);
+            user.add();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
