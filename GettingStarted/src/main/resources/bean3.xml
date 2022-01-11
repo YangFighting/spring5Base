@@ -10,4 +10,29 @@
         <property name="userDao" ref="userDaoImpl"/>
     </bean>
     <bean id="userDaoImpl" class="com.yang.dao.Impl.UserDaoImpl"/>
+
+    <bean id="userService1" class="com.yang.service.UserService">
+        <!--注入 user对象
+             name属性：userService类的属性名称，需要写set方法
+             注入内部 bean-->
+        <property name="user">
+            <bean class="com.yang.pojo.User">
+                <property name="name" value="张三_名称"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="userService2" class="com.yang.service.UserService">
+        <!--注入 user对象
+             name属性：userService类的属性名称，需要写set方法
+             级联注入-->
+        <property name="user" ref="user4">
+
+        </property>
+    </bean>
+
+    <bean id="user4" class="com.yang.pojo.User">
+        <property name="name" value="李四_名称"/>
+    </bean>
+
 </beans>
