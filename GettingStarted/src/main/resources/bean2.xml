@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注入属性的方式-->
+    <!--第一种： set 方法注入属性 -->
+    <bean id = "user1" class="com.yang.pojo.User">
+        <property name="name" value="张三"/>
+    </bean>
+
+    <!--第二种： 有参构造函数注入属性
+        需要显性写出无参构造，否则 xml注入会报错 -->
+    <bean id ="user2" class="com.yang.pojo.User">
+        <constructor-arg name="name" value="李四"/>
+    </bean>
+
+    <!--第三种： p名称空间注入
+        需要在配置文件中添加 p名称空间-->
+    <bean id="user3" class="com.yang.pojo.User" p:name="王五"/>
+
+</beans>
