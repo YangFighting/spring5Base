@@ -1,11 +1,13 @@
 package com.yang.pojo;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Arrays;
 
 /**
  * @author zhangyang
@@ -27,17 +29,17 @@ public class UserTest {
     }
 
     @Test
-    public void add1Test(){
+    public void add1Test() {
 
         // 工厂类
-        class UserFactory{
+        class UserFactory {
 
             public User getUser() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
                 // 解析xml 获得 class属性值
                 String classValue = "com.yang.pojo.User";
                 // 反射，创建对象
                 Class aClass = Class.forName(classValue);
-                return (User)aClass.newInstance();
+                return (User) aClass.newInstance();
             }
         }
 
@@ -89,7 +91,37 @@ public class UserTest {
 
     }
 
+    @Test
+    public void user4Test() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean4.xml");
+        User user4 = context.getBean("user4", User.class);
+        Assert.assertNotNull(user4);
+        logger.warn(user4.toString());
 
+        logger.warn("courses: ");
+        Arrays.stream(user4.getCourses()).forEach(logger::warn);
+
+        logger.warn("list: ");
+        user4.getList().forEach(logger::warn);
+
+        logger.warn("maps: ");
+        user4.getMaps().forEach((k, v) -> logger.warn(k + ":" + v));
+
+        logger.warn("sets: ");
+        user4.getSets().forEach(logger::warn);
+    }
+
+    @Test
+    public void user5Test() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean4.xml");
+        User user5 = context.getBean("user5", User.class);
+        Assert.assertNotNull(user5);
+        logger.warn(user5.toString());
+
+
+        logger.warn("list: ");
+        user5.getList().forEach(logger::warn);
+    }
 
 
 }
