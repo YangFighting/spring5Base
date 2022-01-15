@@ -1,9 +1,10 @@
 package com.yang.dao.Impl;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+
 import com.yang.dao.UserDao;
 import com.yang.pojo.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author zhangyang
